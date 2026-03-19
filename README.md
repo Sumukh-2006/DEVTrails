@@ -4,7 +4,7 @@
 
 
 
-> \*\*GigKavach\*\* is an AI-powered parametric insurance platform that automatically detects income-disrupting events, computes payouts using a real-time Disruption Composite Index, and credits money to a gig worker's UPI account by end of day — without the worker filing a single claim.
+> **GigKavach** is an AI-powered parametric insurance platform that automatically detects income-disrupting events, computes payouts using a real-time Disruption Composite Index, and credits money to a gig worker's UPI account by end of day — without the worker filing a single claim.
 
 
 
@@ -15,7 +15,7 @@
 
 </div>
 
-\---
+---
 
 ## 📋 Table of Contents
 
@@ -41,7 +41,7 @@
 20. [Demo Video](#20-demo-video)
 21. [Summary](#21-summary)
 
-\---
+---
 
 ## 1\. The Problem
 
@@ -53,7 +53,7 @@ This happens to over 10 million platform-based delivery workers across India. Ex
 
 > \*We are not solving vehicle repair or health coverage. We are solving one specific, overlooked problem: \*\*income lost because of events completely outside the worker's control.\*\*\*
 
-\---
+---
 
 ## 2\. The Solution
 
@@ -76,7 +76,7 @@ A worker joins via WhatsApp in under 4 minutes, pays a weekly premium as low as 
 
 </div>
 
-\---
+---
 
 ## 3\. Why GigKavach Is Different
 
@@ -92,7 +92,7 @@ A worker joins via WhatsApp in under 4 minutes, pays a weekly premium as low as 
 |Coverage scope|Broad|Broad|**Income loss only — laser focused**|
 |Zone granularity|State level|City level|**Pin-code level**|
 
-\---
+---
 
 ## 4\. Persona Deep Dive
 
@@ -114,7 +114,7 @@ We chose this persona because food delivery workers are the most weather-sensiti
 
 **Key Insight:** This worker will not download a new app. They will not navigate a claims portal. They will not call a helpline. Any product that requires any of these has already failed for this persona. GigKavach works entirely within WhatsApp — a tool already open on their phone every day.
 
-\---
+---
 
 ## 5\. Application Workflow
 
@@ -191,7 +191,7 @@ WhatsApp Confirmation: "₹280 sent to ravi@upi. Ref: RZP12345.
 |`HELP`|Show all commands|
 |`APPEAL`|Contest a fraudulent claim (48 hours)|
 
-\---
+---
 
 ## 6\. The DCI Engine
 
@@ -255,7 +255,7 @@ If our AI model is genuinely down or all data feeds fail, the SLA breach payout 
 
 Our architecture makes these payouts extremely rare — four independent layers (multiple API sources) must all fail simultaneously before one triggers.
 
-\---
+---
 
 ## 7\. Weekly Premium Model
 
@@ -282,7 +282,7 @@ Dynamic ML (XGBoost) is applied to **payout calculation only** — not premium p
 * **Tier lock:** Plan upgrades apply from the next weekly cycle only. A worker cannot upgrade to Shield Pro on Thursday because a storm is forecast for Friday.
 * **Coverage delay:** First-time coverage begins 24 hours after initial payment. Workers cannot sign up during an active disaster.
 
-\---
+---
 
 ## 8\. Parametric Triggers
 
@@ -312,9 +312,9 @@ GigKavach insures **income lost during external disruption events only.**
 * ❌ Life insurance
 * ❌ Personal decisions to take leave
 
-> \*GigKavach is a safety net for uncontrollable external events that prevent a willing worker from earning. It is not a general income supplement.\*
+> *GigKavach is a safety net for uncontrollable external events that prevent a willing worker from earning. It is not a general income supplement.*
 
-\---
+---
 
 ## 9\. AI/ML Integration
 
@@ -366,7 +366,7 @@ DCI social component += 35 for affected zones
 
 **Transition for new workers:** City-segment average blends into personal history over 4 weeks (30% personal at week 3, 60% at week 4, 100% personal from week 5).
 
-\---
+---
 
 ## 10\. Fraud Detection Architecture
 
@@ -426,13 +426,13 @@ Innocent workers in the same zone as a fraud ring are never punished.
 
 The `APPEAL` command allows workers to challenge the fraudulent claim done by the AI model. The request is processed within 48 hours and payout is automatically processed if the claim turned out to be false.
 
-\---
+---
 
 ## 11\. Adversarial Defense \& Anti-Spoofing Strategy
 
 GigKavach's fraud architecture was designed from the ground up with coordinated GPS-spoofing syndicates in mind. The individual scoring system described in Section 10 is the foundation — but the anti-spoofing layer goes significantly deeper, using 6 independent non-GPS signals to separate genuine stranded workers from bad actors.
 
-\---
+---
 
 ### The Differentiation
 
@@ -454,7 +454,7 @@ for worker in flagged\_cluster:
 
 This individual scoring foundation is what makes the anti-spoofing response surgical rather than blunt.
 
-\---
+---
 
 ### The Data — 6 Signals Beyond Basic GPS
 
@@ -464,14 +464,14 @@ This individual scoring foundation is what makes the anti-spoofing response surg
 * GPS spoofing apps manipulate only the GPS layer. Cell tower IDs are controlled by the carrier network and cannot be faked by any consumer spoofing application.
 * If GPS reports Koramangala but cell towers resolve to Marathahalli → **hard fraud signal.**
 
-\---
+---
 
 **Signal 2 — IP Geolocation Cross-Check**
 
 * Already part of GigKavach's detection table as *"GPS vs IP address mismatch."*
 * In the syndicate scenario, this signal scales powerfully: 500 workers simultaneously claiming to be in Koramangala while their IP addresses resolve across 12 different residential ISP nodes is a statistical impossibility that no genuine disruption event produces.
 
-\---
+---
 
 **Signal 3 — Pre-Disruption Earnings Velocity**
 
@@ -479,7 +479,7 @@ This individual scoring foundation is what makes the anti-spoofing response surg
 * A genuinely stranded worker earned something before the storm halted orders. A spoofer who never left home shows ₹0 platform earnings for the entire day.
 * Zero pre-disruption earnings + GPS appearing in zone only after DCI became imminent → **elevated fraud score.**
 
-\---
+---
 
 **Signal 4 — GPS Movement Entropy**
 
@@ -487,7 +487,7 @@ This individual scoring foundation is what makes the anti-spoofing response surg
 * GPS spoofing apps broadcast perfectly static coordinates or mathematically straight-line movement.
 * Movement entropy computed over the 30 minutes before the trigger separates human motion signatures from synthetic ones. A human on a delivery bike cannot hold coordinates to 6 decimal places.
 
-\---
+---
 
 **Signal 5 — Claim Timing Clustering — The Telegram Signature**
 
@@ -496,7 +496,7 @@ This individual scoring foundation is what makes the anti-spoofing response surg
 * Telegram-coordinated syndicates produce timestamp clustering with standard deviation under 90 seconds — statistically impossible in natural disruptions.
 * **Critically, this signal does not compromise the parametric nature of GigKavach.** Workers are not filing claims. The system is detecting coordination in the pattern of eligibility checks it runs autonomously. The parametric DCI trigger fires or does not fire based purely on objective external data — this signal only determines whether the automated payout for an already-triggered event is legitimate.
 
-\---
+---
 
 **Signal 6 — Zone Historical Loyalty**
 
@@ -504,7 +504,7 @@ This individual scoring foundation is what makes the anti-spoofing response surg
 * A worker who declared HSR Layout at onboarding and has 4 weeks of history there — but whose GPS suddenly places them in a high-DCI Koramangala zone they have never delivered in — is exhibiting a pattern no genuine delivery worker produces.
 * Syndicate members pick whichever zone has the highest DCI with no regard for their actual delivery geography. Zone loyalty mismatch is clean, objective, and rooted in data the worker themselves provided.
 
-\---
+---
 
 ### The UX Balance — Contextual Fraud Scoring
 
@@ -533,13 +533,13 @@ All 6 signals pass. Payout fires at EOD. Worker receives payment confirmation. N
 
 5 or more signals confirm fraud. Maps directly to GigKavach's **Tier 2 Hard Flag or Tier 3 Blacklist** depending on whether syndicate coordination is confirmed. Payout blocked. Worker notified. The `APPEAL` command opens a 48-hour data discrepancy window — cross-checked automatically against IMD and KSNDMC official records. System resolves without human discretion. The parametric contract remains intact at every stage.
 
-> \*\*Architectural principle:\*\* Workers are never told "you look fraudulent." Signal degradation language is used consistently — framing every verification as a system condition, not a personal accusation. This protects innocent workers psychologically while blocking bad actors operationally.
+> **Architectural principle:** Workers are never told "you look fraudulent." Signal degradation language is used consistently — framing every verification as a system condition, not a personal accusation. This protects innocent workers psychologically while blocking bad actors operationally.
 
-\---
+---
 
 ## 12\. Edge Case Handling
 
-GigKavach has systematically addressed 27 documented edge cases across 7 system modules. This section summarises the most critical ones. The full edge case handbook (27 cases with pseudocode) is available in [`/docs/edge\_cases.pdf`](./docs/edge_cases.pdf).
+GigKavach has systematically addressed 27 documented edge cases across 7 system modules. This section summarises the most critical ones. The full edge case handbook (27 cases with pseudocode) is available in [`/docs/edge_cases.pdf`](./docs/edge_cases.pdf).
 
 <details>
 <summary><b>👷 View Worker Eligibility Edge Cases</b></summary>
@@ -575,7 +575,7 @@ GigKavach has systematically addressed 27 documented edge cases across 7 system 
 
 </details>
 
-\---
+---
 
 ## 13\. Special Features
 
@@ -602,7 +602,7 @@ Shift windows are personalised per worker. Night shift workers (6PM–2AM) have 
 
 GigKavach's admin dashboard includes a mock "Zomato Partner Benefits" integration page demonstrating how the platform can be offered as a white-label benefit to delivery workers directly through their app. One platform deal = instant access to hundreds of thousands of workers. This is the production go-to-market path.
 
-\---
+---
 
 ## 14\. Multilingual Support
 
@@ -618,9 +618,9 @@ GigKavach supports **5 languages** because a financial safety net that workers c
 
 Language is selected at onboarding Step 0 and can be changed anytime via the `LANG` command. All 30 worker-facing messages — onboarding, alerts, payout confirmations, weekly updates — are pre-translated and stored in a static dictionary. No runtime translation API calls. Instant, free, reliable.
 
-> \*"बंद आपके ज़ोन में डिटेक्ट हुआ। ₹280 आपके UPI में भेजा जा रहा है।"\* — This is what protection actually feels like to a Hindi-speaking delivery partner.
+> *"बंद आपके ज़ोन में डिटेक्ट हुआ। ₹280 आपके UPI में भेजा जा रहा है।"* — This is what protection actually feels like to a Hindi-speaking delivery partner.
 
-\---
+---
 
 ## 15\. Tech Stack
 
@@ -643,7 +643,7 @@ Language is selected at onboarding Step 0 and can be changed anytime via the `LA
 |Social|Deccan Herald RSS + The Hindu RSS|DCI social disruption component|
 |Geocoding|MAPPLS + OSM Nominatim + Karnataka GeoJSON|Zone assignment from GPS|
 
-\---
+---
 
 ## 16\. API Integrations
 
@@ -672,7 +672,7 @@ Language is selected at onboarding Step 0 and can be changed anytime via the `LA
 
 **Total API cost for hackathon: ₹0**
 
-\---
+---
 
 ## 17\. Database Design
 
@@ -685,66 +685,66 @@ GigKavach uses **8 tables** in Supabase PostgreSQL. Data is stored for exactly a
 |-|-|-|
 |`workers`|Permanent|Worker identity, language, shift, UPI, GigScore|
 |`policies`|Permanent|Weekly policy records per worker|
-|`activity\_log`|4 weeks rolling|Raw daily login activity — source of truth for baselines|
-|`activity\_history`|Current only|Computed weekly summary (avg start/end/hours per day)|
-|`dci\_events`|30 days|Disruption log per zone — triggers and scores|
+|`activity_log`|4 weeks rolling|Raw daily login activity — source of truth for baselines|
+|`activity_history`|Current only|Computed weekly summary (avg start/end/hours per day)|
+|`dci_events`|30 days|Disruption log per zone — triggers and scores|
 |`payouts`|Permanent|Every payout record — audit trail, never deleted|
-|`fraud\_flags`|Permanent|All fraud signals — never deleted|
-|`api\_health\_log`|7 days|API uptime tracking for SLA breach eligibility|
+|`fraud_flags`|Permanent|All fraud signals — never deleted|
+|`api_health_log`|7 days|API uptime tracking for SLA breach eligibility|
 
 </details>
 
 **Why 4 weeks for activity log?** All eligibility checks, baseline calculations, and intent verification reference "last 4 weeks." Storing more wastes space. Storing less breaks the formulas. 4 weeks is the exact minimum correct answer.
 
-**Storage estimate for demo:** \~20MB total against 500MB free tier. Cost: ₹0.
+**Storage estimate for demo:** ~20MB total against 500MB free tier. Cost: ₹0.
 
-\---
+---
 
 ## 18\. Six-Week Development Roadmap
 
 ### Phase 1 — March 4–20: Ideation \& Foundation ✅
 
-* \[x] Problem research and persona definition
-* \[x] DCI formula design and component selection
-* \[x] Weekly premium model design
-* \[x] Parametric trigger thresholds defined
-* \[x] Tech stack selection
-* \[x] Edge case documentation (27 cases)
-* \[x] API research and Karnataka coverage assessment
-* \[x] Database schema design
-* \[x] WhatsApp conversation flow design
-* \[x] Adversarial defense \& anti-spoofing strategy
-* \[x] README documentation
+* [x] Problem research and persona definition
+* [x] DCI formula design and component selection
+* [x] Weekly premium model design
+* [x] Parametric trigger thresholds defined
+* [x] Tech stack selection
+* [x] Edge case documentation (27 cases)
+* [x] API research and Karnataka coverage assessment
+* [x] Database schema design
+* [x] WhatsApp conversation flow design
+* [x] Adversarial defense \& anti-spoofing strategy
+* [x] README documentation
 
 ### Phase 2 — March 21–April 4: Automation \& Protection
 
-* \[ ] FastAPI backend setup + Supabase integration
-* \[ ] WhatsApp webhook handler (Twilio)
-* \[ ] Full onboarding conversation flow (5 languages)
-* \[ ] DCI engine with 4-layer redundancy
-* \[ ] XGBoost payout model (synthetic training data)
-* \[ ] Dynamic payout calculation API
-* \[ ] Policy management system
-* \[ ] Claims auto-trigger pipeline
-* \[ ] Razorpay test mode payout integration
-* \[ ] Worker dashboard (PWA)
+* [ ] FastAPI backend setup + Supabase integration
+* [ ] WhatsApp webhook handler (Twilio)
+* [ ] Full onboarding conversation flow (5 languages)
+* [ ] DCI engine with 4-layer redundancy
+* [ ] XGBoost payout model (synthetic training data)
+* [ ] Dynamic payout calculation API
+* [ ] Policy management system
+* [ ] Claims auto-trigger pipeline
+* [ ] Razorpay test mode payout integration
+* [ ] Worker dashboard (PWA)
 
 ### Phase 3 — April 5–17: Scale \& Optimise
 
-* \[ ] Isolation Forest fraud detection model
-* \[ ] GPS validation layer
-* \[ ] Claim clustering detection
-* \[ ] Three-tier penalization system
-* \[ ] Appeals workflow
-* \[ ] Live disruption heatmap (Leaflet.js)
-* \[ ] Insurer analytics dashboard
-* \[ ] Disruption forecast feature
-* \[ ] GigScore implementation
-* \[ ] Surge protection multiplier
-* \[ ] Solidarity pool
-* \[ ] Full end-to-end demo recording
+* [ ] Isolation Forest fraud detection model
+* [ ] GPS validation layer
+* [ ] Claim clustering detection
+* [ ] Three-tier penalization system
+* [ ] Appeals workflow
+* [ ] Live disruption heatmap (Leaflet.js)
+* [ ] Insurer analytics dashboard
+* [ ] Disruption forecast feature
+* [ ] GigScore implementation
+* [ ] Surge protection multiplier
+* [ ] Solidarity pool
+* [ ] Full end-to-end demo recording
 
-\---
+---
 
 ## 19\. Team
 
@@ -759,7 +759,7 @@ GigKavach uses **8 tables** in Supabase PostgreSQL. Data is stored for exactly a
 
 📁 Repository: [https://github.com/VG2476/DEVTrails](https://github.com/VG2476/DEVTrails)
 
-\---
+---
 
 ## 20\. Demo Video
 
@@ -774,7 +774,7 @@ The video covers:
 * Tech stack overview
 * 6-week execution plan
 
-\---
+---
 
 ## 21\. Summary
 
@@ -823,7 +823,7 @@ The video covers:
 └─────────────────────────────────────────────────────────────────┘
 ```
 
-\---
+---
 
 *Built with ❤️
 by Team Quadcore for Guidewire DEVTrails 2026
