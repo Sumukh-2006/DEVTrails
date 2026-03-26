@@ -14,6 +14,8 @@ from typing import List
 from services.weather_service import get_weather_score
 from services.aqi_service import get_aqi_score
 from services.heat_service import get_heat_score
+from services.social_service import get_social_score
+from services.platform_service import get_platform_score
 from utils.redis_client import set_dci_cache
 from utils.supabase_client import get_supabase
 from config.settings import settings
@@ -49,21 +51,22 @@ async def process_zone(pincode: str) -> dict:
     # 1. Fetch live components concurrently
     weather_task = get_weather_score(pincode)
     aqi_task = get_aqi_score(pincode)
+    social_task = get_social_score(pincode)
+    platform_task = get_platform_score(pincode)
     
     # heat_service reads from weather_service's cache.
     # To ensure it grabs the freshest weather data, we await weather first.
     weather_result = await weather_task
     heat_result = await get_heat_score(pincode)
     aqi_result = await aqi_task
+    social_result = await social_task
+    platform_result = await platform_task
     
     w_score = weather_result.get("score", 0)
     a_score = aqi_result.get("score", 0)
     h_score = heat_result.get("score", 0)
-    
-    # TODO: Implement Social / RSI parsing dynamically
-    s_score = 0
-    # TODO: Implement internal Platform congestion logic dynamically
-    p_score = 0
+    s_score = social_result.get("score", 0)
+    p_score = platform_result.get("score", 0)
     
     # 2. Compute Composite DCI Score (Weighted aggregation)
     # Rainfall*0.3 + AQI*0.2 + Heat*0.2 + Social*0.2 + Platform*0.1
@@ -79,8 +82,8 @@ async def process_zone(pincode: str) -> dict:
             "rainfall": weather_result,
             "aqi": aqi_result,
             "heat": heat_result,
-            "social": {"score": s_score, "source": "rss_parser_mock"},
-            "platform": {"score": p_score, "source": "platform_status_mock"},
+            "social": social_result,
+            "platform": platform_result,
         },
         "updated_at": datetime.datetime.now(datetime.timezone.utc).isoformat()
     }
