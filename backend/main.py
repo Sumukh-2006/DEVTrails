@@ -110,6 +110,17 @@ async def lifespan(app: FastAPI):
             name="Claims Processing Pipeline",
         )
 
+        # ── Self Keep-Alive (Prevent Render Spin-Down) ──────────────────────
+        # Ping the health endpoint every 5 min to keep backend warm on Render free tier
+        from cron.keep_alive import run_keep_alive
+        scheduler.add_job(
+            run_keep_alive,
+            "interval",
+            seconds=settings.DCI_POLL_INTERVAL_SECONDS,  # 5-min cadence, synced with DCI
+            id="keep_alive",
+            name="Backend Keep-Alive (Render Free Tier)",
+        )
+
         scheduler.start()
         app.state.scheduler = scheduler
         logger.info(f"APScheduler started | DCI poll every {settings.DCI_POLL_INTERVAL_SECONDS}s")
@@ -190,7 +201,7 @@ app.include_router(workers_router)    # POST /api/v1/register — Sumukh
 app.include_router(policies_router)   # GET + PATCH /api/v1/policy/{id} — Sumukh
 app.include_router(dci_router, prefix="/api/v1")           # Varshit — DCI engine
 app.include_router(whatsapp_router, prefix="/api")          # Sumukh — Twilio webhook at /api/whatsapp/webhook
-app.include_router(payouts_router, prefix="/api/v1")        # Sumukh — payout calculation
+app.include_router(payouts_router)                          # Already has prefix="/api" in router definition
 app.include_router(fraud_router, prefix="/api/v1")          # Vijeth — fraud assessment (Task 8)
 # TODO: app.include_router(dashboard_router, prefix="/api/v1")  # V Saatwik — admin metrics
 
@@ -205,9 +216,9 @@ async def root():
 from api.dci_alerts import router as dci_alerts_router
 
 app.include_router(dci_alerts_router, prefix="/api/v1")
-from api.payouts import router as payouts_router
+from api.payouts import router as payouts_router_dashboard
 
-app.include_router(payouts_router)
+app.include_router(payouts_router_dashboard)
 
 from api import dci_Dashboard
 
