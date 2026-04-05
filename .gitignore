@@ -9,6 +9,24 @@
 # .env.example is committed (it's a template)
 
 # ═════════════════════════════════════════════════════════════════════
+# Root-level Ignores (Global catch-all)
+# ═════════════════════════════════════════════════════════════════════
+node_modules/
+.venv/
+venv/
+__pycache__/
+*.pyc
+*.pyo
+*.log
+logs/
+.wwebjs_auth/
+.wwebjs_cache/
+dist/
+build/
+.cache/
+.puppeteer/
+
+# ═════════════════════════════════════════════════════════════════════
 # Backend (Python)
 # ═════════════════════════════════════════════════════════════════════
 backend/__pycache__/
